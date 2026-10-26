@@ -1,0 +1,72 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*pek*
+credentials.json
+secrets.json
+*_credentials*
+*_secret*
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Jupyter outputs can expose private information
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Datasets and generated data (allow only explicitly reviewed synthetic files)
+data/raw/
+data/private/
+data/processed/
+data/external/
+!data/synthetic/
+!data/synthetic/README.md
+
+# Model weights, caches, checkpoints, and adapters
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.onnx
+*.gguf
+adapter_model*
+adapter_config.json
+checkpoint-*/
+outputs/
+runs/
+wandb/
+.cache/
+huggingface/
+.transformers/
+models/
+model_weights/
+lora_adapter/
+querycraft_lora_adapter/
+
+# Logs and local database files
+*.log
+*.db
+*.sqlite
+*.dump
+*.backup
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

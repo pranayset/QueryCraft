@@ -1,0 +1,21 @@
+project:
+  name: QueryCraft
+  environment: development
+
+model:
+  model_id: google/gemma-3-1b-it
+  # Do not store downloaded weights or adapter paths in Git.
+  adapter_path: null
+  max_new_tokens: 256
+  temperature: 0.0
+
+neo4j:
+  database: neo4j
+  # URI and credentials must come from environment variables, not this file.
+  read_only: true
+  query_timeout_seconds: 10
+
+safety:
+  reject_write_clauses: true
+  reject_multiple_statements: true
+  max_query_chars: 4000
