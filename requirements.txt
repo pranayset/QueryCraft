@@ -1,13 +1,17 @@
-# Core app and configuration
+# Core application
 gradio>=5.0,<7.0
 python-dotenv>=1.0,<2.0
+PyYAML>=6.0,<7.0
+
+# Graph database driver (connection is optional; demo does not execute queries)
 neo4j>=5.20,<7.0
 
-# Tests
+# Testing
 pytest>=8.0,<9.0
 
-# Optional model/training dependencies: install only in a suitable GPU/Colab environment.
-# Uncomment and pin versions after validating compatibility in your runtime.
+# Optional model development dependencies.
+# Install only in a compatible GPU/Colab environment and pin versions
+# after validating the complete stack for your runtime.
 # torch
 # transformers
 # accelerate
