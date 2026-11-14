@@ -1,29 +1,37 @@
 # Security Policy
 
-## Supported scope
-This is a learning starter project. Security reports should focus on vulnerabilities in code included in this repository.
+## Scope
 
-## Reporting a concern
-Do not publish credentials, private keys, personal data, private datasets, or exploit details in a public issue. Remove sensitive values and report the issue privately to the repository maintainer using GitHub's private vulnerability reporting feature, if enabled. If private reporting is unavailable, contact the maintainer through a verified private channel.
+QueryCraft is an educational/portfolio prototype for natural-language-to-Cypher experimentation. Reports are welcome for vulnerabilities in code and configuration maintained in this repository.
 
-## Secret handling
+## Reporting a vulnerability
+
+Please do not disclose credentials, personal information, private datasets, or exploit details in a public issue. Use GitHub's private vulnerability reporting feature for this repository if it is enabled. Otherwise, contact the repository maintainer through a verified private channel. Include a concise description, impact, reproduction steps, and suggested mitigation where possible.
+
+## Secret and artifact handling
+
 - Keep credentials in a local `.env` file or an approved secret manager.
-- Never commit `.env`, cloud credentials, `*.pem`, `*.key`, `*.p12`, `*.pfx`, tokens, or database dumps.
-- If a secret is committed, revoke/rotate it immediately. Deleting the file in a later commit does not remove it from Git history.
-- Use least-privilege Neo4j credentials and a dedicated development database.
+- Never commit API tokens, passwords, private keys, `*.pem`, `*.pek`, certificates, database dumps, or cloud credentials.
+- If a secret is exposed, revoke or rotate it immediately. Removing the file in a later commit does not remove it from Git history.
+- Do not publish private datasets, model weights, checkpoints, or LoRA/PEFT adapters without explicit redistribution permission.
+- Review notebook cells, outputs, metadata, screenshots, and commit diffs before pushing.
 
-## Cypher safety
-- Treat model-generated Cypher as untrusted input.
-- Allow only an explicit read-only query policy; reject write clauses and multiple statements.
-- Use server-side read-only transactions and query timeouts where supported.
-- Validate query structure and parameters before execution. Do not rely on prompt instructions alone.
-- Never connect a public demo to a production database.
+## Cypher and database safety
 
-## Data and model artifacts
-- Publish only synthetic or appropriately licensed datasets.
-- Do not commit private datasets, model weights, checkpoints, or trained LoRA/PEFT adapters unless distribution is explicitly authorized.
-- Inspect notebooks for outputs containing secrets before publishing.
+- Treat all model-generated Cypher as untrusted input.
+- The included lexical validator is a basic prototype guardrail, not a complete parser and not a security boundary.
+- Do not execute generated queries against production data.
+- Any future execution feature must use a dedicated least-privilege Neo4j account, server-side read-only transactions, query timeouts, result limits, and parameterized values.
+- Reject write and administrative operations at the database boundary; do not rely on prompt instructions or UI checks alone.
+- Do not expose Neo4j credentials to a public Gradio client.
 
-## Dependency hygiene
-- Install from a reviewed dependency list, keep packages updated, and investigate security advisories.
-- Do not treat a successful test run as proof that the application is secure.
+## Dependencies and deployment
+
+- Install reviewed dependencies and monitor security advisories.
+- Keep secrets in deployment secret settings, never in source code or notebook cells.
+- Restrict public demos to synthetic or otherwise approved data.
+- A passing test suite does not establish that the application is secure.
+
+## Supported versions
+
+This policy applies to the current public repository state on the default branch. Security fixes are handled as maintainers are able to review and validate them.
