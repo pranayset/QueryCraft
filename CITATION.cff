@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use or reference QueryCraft, please cite this repository."
+title: "QueryCraft: Natural Language to Cypher Graph Query Generation"
+authors:
+  - family-names: Setu
+    given-names: Pranay
+version: 0.1.0
+repository-code: "https://github.com/pranayset/QueryCraft"
