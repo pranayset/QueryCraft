@@ -19,8 +19,6 @@ credentials.json
 secrets.json
 *_credentials*
 *_secret*
-*token*
-*api_key*
 
 # Python environments and caches
 __pycache__/
@@ -35,25 +33,21 @@ htmlcov/
 venv/
 env/
 
-# Jupyter private outputs/checkpoints
+# Jupyter checkpoints and sensitive local outputs
 .ipynb_checkpoints/
 *.ipynb_checkpoints
 
-# Private, raw, reviewed, processed, or external datasets
+# Private or non-publishable datasets
 data/raw/
 data/private/
 data/processed/
 data/reviewed/
 data/external/
-*.csv
-*.parquet
-*.arrow
-*.feather
-*.sqlite
-*.db
-*.dump
-*.backup
-!data/synthetic/README.md
+private_data/
+datasets/private/
+*.private.jsonl
+*.private.json
+*.private.csv
 
 # Model weights, checkpoints, and adapters
 *.safetensors
@@ -81,7 +75,11 @@ lora_adapter/
 *_lora_adapter/
 *_adapter/
 
-# Logs and temporary files
+# Local database files and logs
+*.db
+*.sqlite
+*.dump
+*.backup
 *.log
 *.tmp
 *.bak
