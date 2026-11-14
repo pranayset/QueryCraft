@@ -1,41 +1,61 @@
-# Secrets and local configuration
+# Secrets, credentials, and local configuration
 .env
 .env.*
 !.env.example
 *.pem
+*.pek
 *.key
+*.ppk
 *.p12
 *.pfx
-*pek*
+*.crt
+*.cer
+*.der
+*.jks
+*.keystore
+id_rsa*
+id_ed25519*
 credentials.json
 secrets.json
 *_credentials*
 *_secret*
+*token*
+*api_key*
 
-# Python
+# Python environments and caches
 __pycache__/
 *.py[cod]
 *.egg-info/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.coverage
+htmlcov/
 .venv/
 venv/
 env/
 
-# Jupyter outputs can expose private information
+# Jupyter private outputs/checkpoints
 .ipynb_checkpoints/
 *.ipynb_checkpoints
 
-# Datasets and generated data (allow only explicitly reviewed synthetic files)
+# Private, raw, reviewed, processed, or external datasets
 data/raw/
 data/private/
 data/processed/
+data/reviewed/
 data/external/
-!data/synthetic/
+*.csv
+*.parquet
+*.arrow
+*.feather
+*.sqlite
+*.db
+*.dump
+*.backup
 !data/synthetic/README.md
 
-# Model weights, caches, checkpoints, and adapters
+# Model weights, checkpoints, and adapters
 *.safetensors
 *.bin
 *.pt
@@ -44,9 +64,11 @@ data/external/
 *.h5
 *.onnx
 *.gguf
+*.model
 adapter_model*
 adapter_config.json
 checkpoint-*/
+checkpoint_*/
 outputs/
 runs/
 wandb/
@@ -56,14 +78,13 @@ huggingface/
 models/
 model_weights/
 lora_adapter/
-querycraft_lora_adapter/
+*_lora_adapter/
+*_adapter/
 
-# Logs and local database files
+# Logs and temporary files
 *.log
-*.db
-*.sqlite
-*.dump
-*.backup
+*.tmp
+*.bak
 
 # OS/editor
 .DS_Store
