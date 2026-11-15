@@ -1,0 +1,9 @@
+# Install only in the Colab GPU runtime after checking CUDA compatibility.
+# These are optional model dependencies; the core Gradio app does not need them.
+torch
+transformers
+accelerate
+peft
+bitsandbytes
+safetensors
+sentencepiece
