@@ -7,7 +7,7 @@
 
 QueryCraft is a portfolio project exploring natural-language-to-Cypher generation for a small Neo4j movie graph. The project separates graph-schema design, dataset preparation, model experimentation, query validation, and a Gradio interface.
 
-> **Project status:** The repository currently provides a runnable Gradio starter and basic lexical read-only checks. The checked-in generator is a deterministic placeholder, not the fine-tuned Gemma model. Model training, adapter loading, and end-to-end execution must be configured and evaluated separately before describing them as production-ready.
+> **Project status:** The `feature/gemma3-neo4j-integration` branch adds lazy Gemma 3 4B LoRA inference, conservative Cypher screening, optional Neo4j read-transaction execution, and a batch evaluation runner. The model/adapter and database are external runtime dependencies; live inference and graph evaluation still need to be run in the configured Colab environment.
 
 ## Project goals
 
@@ -67,6 +67,12 @@ python app.py
 
 # Run tests
 python -m pytest
+
+# On the integration branch, install model extras in a compatible GPU runtime:
+pip install -r requirements-model.txt
+
+# Batch evaluation (requires adapter + Neo4j configuration):
+python -m querycraft.evaluation --output reports/querycraft_evaluation.csv
 ```
 
 ### Linux / macOS
@@ -89,16 +95,16 @@ Copy `.env.example` to `.env` for local configuration. Populate secrets only in 
 
 The checked-in YAML example is at `configs/config.example.yaml`. Model IDs and optional local adapter paths must be reviewed against the actual runtime. Do not put adapter files, weights, or credentials in the repository.
 
-## Model development
+## Gemma 3 4B and Neo4j integration
 
-The project has previously explored Gemma 3 4B IT with LoRA/PEFT and a Neo4j AuraDB movie-graph schema. Training artifacts and private reviewed datasets are intentionally not distributed in this repository. Use the notebooks and documentation as the reproducibility entry point; record the exact model revision, dataset version, configuration, hardware, and evaluation results when publishing future experiments.
+See [Model and Neo4j integration guide](docs/MODEL_AND_NEO4J_INTEGRATION.md). The integration branch loads the existing private Gemma 3 4B LoRA adapter, generates schema-constrained Cypher, screens it, and can optionally run it against Neo4j using a server-side read transaction. Run the evaluation runner to create a CSV report. Do not publish results until the live run has completed and been reviewed.
 
 ## Safety boundary
 
 - Treat generated Cypher as untrusted input.
-- The included validator is a basic lexical filter, not a Cypher parser or security boundary.
-- Do not execute model output against a production database.
-- If database execution is added, use a dedicated least-privilege Neo4j account, server-side read-only transactions, parameterized values, and query timeouts.
+- The included validator is a conservative lexical filter, not a Cypher parser or security boundary.
+- The integration branch executes only inside Neo4j server-side read transactions and requires a dedicated least-privilege read-only account.
+- Keep result limits and query timeouts enabled; never connect model-generated queries to a production database.
 - Never rely on prompt instructions or client-side checks as the only protection.
 
 See [SECURITY.md](SECURITY.md) for the reporting and security policy.
