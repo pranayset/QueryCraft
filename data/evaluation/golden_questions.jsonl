@@ -1,0 +1,8 @@
+{"id":"Q01","question":"What is the release year of The Matrix?","expected_pattern":"RETURN\\s+m\\.released\\s+AS\\s+release_year"}
+{"id":"Q02","question":"Find all movies released in 1999.","expected_pattern":"m\\.released\\s*=\\s*1999"}
+{"id":"Q03","question":"List all movie titles.","expected_pattern":"RETURN\\s+m\\.title\\b"}
+{"id":"Q04","question":"Which people acted in The Matrix?","expected_pattern":"\\[:ACTED_IN\\]"}
+{"id":"Q05","question":"Which people directed The Matrix?","expected_pattern":"\\[:DIRECTED\\]"}
+{"id":"Q06","question":"Which movies belong to a genre?","expected_pattern":"\\[:IN_GENRE\\]"}
+{"id":"Q07","question":"Find movies released after 2010.","expected_pattern":"m\\.released\\s*>\\s*2010"}
+{"id":"Q08","question":"How many movies are in the database?","expected_pattern":"count\\s*\\(\\s*m\\s*\\)"}
