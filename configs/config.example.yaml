@@ -3,19 +3,25 @@ project:
   environment: development
 
 model:
-  model_id: google/gemma-3-1b-it
-  # Do not store downloaded weights or adapter paths in Git.
-  adapter_path: null
-  max_new_tokens: 256
+  model_id: google/gemma-3-4b-it
+  # Keep the adapter on private Drive/local storage; never commit its files.
+  adapter_path_env: ADAPTER_PATH
+  load_in_4bit: true
+  quantization: nf4
+  compute_dtype: float16
+  attention_implementation: eager
+  max_new_tokens: 128
   temperature: 0.0
 
 neo4j:
   database: neo4j
-  # URI and credentials must come from environment variables, not this file.
+  # URI, username, and password are environment variables only.
   read_only: true
   query_timeout_seconds: 10
+  max_result_records: 100
 
 safety:
   reject_write_clauses: true
+  reject_procedures: true
   reject_multiple_statements: true
   max_query_chars: 4000
